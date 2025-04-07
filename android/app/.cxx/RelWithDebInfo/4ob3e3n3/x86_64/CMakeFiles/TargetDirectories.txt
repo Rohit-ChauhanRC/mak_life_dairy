@@ -1,0 +1,2 @@
+/Users/genmak/Documents/Mak dairy 2025/webview_mak_dairy-main/android/app/.cxx/RelWithDebInfo/4ob3e3n3/x86_64/CMakeFiles/edit_cache.dir
+/Users/genmak/Documents/Mak dairy 2025/webview_mak_dairy-main/android/app/.cxx/RelWithDebInfo/4ob3e3n3/x86_64/CMakeFiles/rebuild_cache.dir
