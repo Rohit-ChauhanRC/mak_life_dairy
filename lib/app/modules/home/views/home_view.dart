@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import 'package:get/get.dart';
+import 'package:webview_mak_inapp/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -63,13 +64,8 @@ class HomeView extends GetView<HomeController> {
                   shouldOverrideUrlLoading: (cx, navigationAction) async {
                     const platform =
                         MethodChannel("com.maklife.mak_diary/play");
-                    final shouldPerformDownload =
-                        navigationAction.shouldPerformDownload ?? false;
+
                     final url = navigationAction.request.url;
-                    if (shouldPerformDownload && url != null) {
-                      await controller.downloadFile(url.toString());
-                      return NavigationActionPolicy.DOWNLOAD;
-                    }
 
                     if (url.toString().startsWith("http") ||
                         url.toString().startsWith("https")) {
@@ -111,12 +107,16 @@ class HomeView extends GetView<HomeController> {
                     return NavigationActionPolicy.ALLOW;
                   },
                   onDownloadStartRequest: (cx, request) async {
-                    if (kDebugMode) {
-                      print('onDownloadStart ${request.url.toString()}');
-                    }
+                    ScaffoldMessenger.of(Get.context!)
+                        .showSnackBar(const SnackBar(
+                      content: Text("Downloading is in progress please wait!"),
+                    ));
+                    String filepath = await controller.downloadAndOpenPdf(
+                      request.url.toString(),
+                    );
 
-                    await controller.downloadFile(
-                        request.url.toString(), request.suggestedFilename);
+                    Get.toNamed(Routes.PDF_SHOW,
+                        arguments: [request.url.toString(), filepath]);
                   },
                 ),
               ],

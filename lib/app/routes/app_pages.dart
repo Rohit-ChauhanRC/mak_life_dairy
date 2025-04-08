@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:webview_mak_inapp/app/modules/pdf_show/bindings/pdf_show_binding.dart';
+import 'package:webview_mak_inapp/app/modules/pdf_show/views/pdf_show_view.dart';
 
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
@@ -30,6 +32,11 @@ class AppPages {
       name: _Paths.OTP,
       page: () => const OtpView(),
       binding: OtpBinding(),
+    ),
+    GetPage(
+      name: _Paths.PDF_SHOW,
+      page: () => const PdfShowView(),
+      binding: PdfShowBinding(),
     ),
   ];
 }

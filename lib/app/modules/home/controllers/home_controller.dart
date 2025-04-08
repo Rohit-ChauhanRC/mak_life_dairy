@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'dart:isolate';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_download_manager/flutter_download_manager.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -128,6 +130,36 @@ class HomeController extends GetxController {
       ScaffoldMessenger.of(Get.context!).showSnackBar(SnackBar(
         content: Text("Download $filename completed!"),
       ));
+    }
+  }
+
+  Future<String> downloadAndOpenPdf(String url) async {
+    debugPrint("url: $url");
+    try {
+      // Get the application documents directory
+      Directory dir = await getApplicationDocumentsDirectory();
+      String fileName = url
+          .split('/')
+          .last; // Extract filename from URL (last part of the URL)
+
+      if (fileName.isEmpty) {
+        // If filename is empty or invalid, fall back to a default name
+        fileName = 'downloaded.pdf';
+      }
+
+      String filePath = "${dir.path}/$fileName.pdf";
+      debugPrint("Downloading to: $filePath");
+
+      // Create Dio instance and download the file
+      Dio dio = Dio();
+      await dio.download(url, filePath);
+
+      // Open the downloaded file
+      // await OpenFile.open(filePath);
+      debugPrint("PDF Downloaded and Opened!");
+      return filePath;
+    } catch (e) {
+      throw Exception(e);
     }
   }
 }
