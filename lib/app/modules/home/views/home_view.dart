@@ -65,6 +65,13 @@ class HomeView extends GetView<HomeController> {
                     const platform =
                         MethodChannel("com.maklife.mak_diary/play");
 
+                    const platform1 =
+                        MethodChannel("com.maklife.mak_diary/upi");
+
+                    // "com.maklife.mak_diary/intent"
+
+                    const platform2 =
+                        MethodChannel("com.maklife.mak_diary/intent");
                     final url = navigationAction.request.url;
 
                     if (url.toString().startsWith("http") ||
@@ -104,6 +111,38 @@ class HomeView extends GetView<HomeController> {
                         );
                       }
                     }
+                    var url1 = navigationAction.request.url.toString();
+                    if (url1.startsWith("upi://pay")) {
+                      try {
+                        final bool handled = await platform1
+                            .invokeMethod("handleUPIUrl", {"url": url1});
+                        if (handled) {
+                          return NavigationActionPolicy.CANCEL;
+                        }
+                      } on PlatformException catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content:
+                                  Text("Error handling UPI URL: ${e.message}")),
+                        );
+                      }
+                    }
+                    if (url1.startsWith("intent")) {
+                      try {
+                        final bool handled = await platform2
+                            .invokeMethod("handleUPIUrl", {"url": url1});
+                        if (handled) {
+                          return NavigationActionPolicy.CANCEL;
+                        }
+                      } on PlatformException catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content:
+                                  Text("Error handling UPI URL: ${e.message}")),
+                        );
+                      }
+                    }
+
                     return NavigationActionPolicy.ALLOW;
                   },
                   onDownloadStartRequest: (cx, request) async {

@@ -10,8 +10,37 @@ import io.flutter.plugin.common.MethodChannel
 
 class MainActivity: FlutterActivity() {
      private val CHANNEL = "com.maklife.mak_diary/play"
+     private val CHANNEL1 = "com.maklife.mak_diary/upi"
+     private val CHANNEL2 = "com.maklife.mak_diary/intent"
      override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+
+         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL1).setMethodCallHandler { call, result ->
+            if (call.method == "handleUPIUrl") {
+                val url = call.argument<String>("url")
+                if (url != null && url.startsWith("upi")) {
+                    handleUPIUrl(url)
+                    result.success(true)
+                } else {
+                    result.error("INVALID_URL", "The URL is not valid", null)
+                }
+            } else {
+                result.notImplemented()
+            }
+        }
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL2).setMethodCallHandler { call, result ->
+            if (call.method == "handleUPIUrl") {
+                val url = call.argument<String>("url")
+                if (url != null && url.startsWith("intent")) {
+                    handleUPIUrl(url)
+                    result.success(true)
+                } else {
+                    result.error("INVALID_URL", "The URL is not valid", null)
+                }
+            } else {
+                result.notImplemented()
+            }
+        }
 
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
             if (call.method == "handlePlayUrl") {
@@ -27,6 +56,12 @@ class MainActivity: FlutterActivity() {
             }
         }
      }
+
+      private fun handleUPIUrl(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
+    }
 
       private fun handlePlayUrl(url: String) {
         val intent = Intent(Intent.ACTION_VIEW)
