@@ -13,6 +13,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_mak_inapp/app/constants/constants.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+// import 'package:package_info_plus/package_info_plus.dart';
 
 class HomeController extends GetxController {
   //
@@ -73,12 +74,17 @@ class HomeController extends GetxController {
     await Permission.manageExternalStorage.request();
   }
 
+  final RxString _version = "".obs;
+  String get version => _version.value;
+  set version(String str) => _version.value = str;
+
   final count = 0.obs;
   @override
   void onInit() async {
     super.onInit();
     mobileNumber = box.read(Constants.cred) ?? Get.arguments;
     await permisions();
+    // await findVersion();
 
     pullToRefreshController = kIsWeb
         ? null
@@ -107,6 +113,12 @@ class HomeController extends GetxController {
   void onClose() {
     super.onClose();
   }
+
+  // Future<void> findVersion() async {
+  //   PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+  //   version = packageInfo.version;
+  // }
 
   Future<void> downloadFile(String url, [String? filename]) async {
     var hasStoragePermission = await Permission.storage.isGranted;

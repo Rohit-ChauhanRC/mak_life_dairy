@@ -203,4 +203,6 @@ class Constants {
   static const String sendOtp = "otp/ValidateOtpusers";
   static const String verifyOtp = "otp/OTPValidation";
   static const String cred = "mobile_no";
+
+  static const appVersion = "19.0.3";
 }

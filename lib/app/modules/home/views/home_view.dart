@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import 'package:get/get.dart';
+import 'package:webview_mak_inapp/app/constants/constants.dart';
 import 'package:webview_mak_inapp/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
@@ -114,10 +115,19 @@ class HomeView extends GetView<HomeController> {
                     var url1 = navigationAction.request.url.toString();
                     if (url1.startsWith("upi://pay")) {
                       try {
-                        final bool handled = await platform1
-                            .invokeMethod("handleUPIUrl", {"url": url1});
-                        if (handled) {
-                          return NavigationActionPolicy.CANCEL;
+                        if (Platform.isAndroid) {
+                          final bool handled = await platform1
+                              .invokeMethod("handleUPIUrl", {"url": url1});
+                          if (handled) {
+                            return NavigationActionPolicy.CANCEL;
+                          }
+                        } else if (Platform.isIOS) {
+                          if (await canLaunchUrl(Uri.parse(url1.toString()))) {
+                            await launchUrl(Uri.parse(url1.toString()),
+                                mode: LaunchMode.externalApplication);
+                          } else {
+                            throw 'Could not launch ';
+                          }
                         }
                       } on PlatformException catch (e) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -129,10 +139,19 @@ class HomeView extends GetView<HomeController> {
                     }
                     if (url1.startsWith("intent")) {
                       try {
-                        final bool handled = await platform2
-                            .invokeMethod("handleUPIUrl", {"url": url1});
-                        if (handled) {
-                          return NavigationActionPolicy.CANCEL;
+                        if (Platform.isAndroid) {
+                          final bool handled = await platform2
+                              .invokeMethod("handleUPIUrl", {"url": url1});
+                          if (handled) {
+                            return NavigationActionPolicy.CANCEL;
+                          }
+                        } else if (Platform.isIOS) {
+                          if (await canLaunchUrl(Uri.parse(url1.toString()))) {
+                            await launchUrl(Uri.parse(url1.toString()),
+                                mode: LaunchMode.externalApplication);
+                          } else {
+                            throw 'Could not launch ';
+                          }
                         }
                       } on PlatformException catch (e) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -159,6 +178,14 @@ class HomeView extends GetView<HomeController> {
                   },
                 ),
               ],
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.purple[900],
+            onPressed: null,
+            child: const Text(
+              Constants.appVersion,
+              style: TextStyle(color: Colors.white),
             ),
           ),
         ),

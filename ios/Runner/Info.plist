@@ -34,6 +34,8 @@
 	<true/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<true/>
+	<key>MinimumOSVersion</key>
+	<string>14.0</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -50,6 +52,20 @@
 				<true/>
 				<key>NSTemporaryExceptionMinimumTLSVersion</key>
 				<string>TLSv1.1</string>
+			</dict>
+			<key>https://api.payu.in</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+			<key>https://payu.maklifedairy.in</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
 			</dict>
 		</dict>
 	</dict>
@@ -72,10 +88,10 @@
 	<dict>
 		<key>BackgroundColor</key>
 		<string>#FFFFFF</string>
-		<key>ImageName</key>
-		<string>LaunchIcon</string> <!-- optional -->
 		<key>Image respects safe area insets</key>
 		<true/>
+		<key>ImageName</key>
+		<string>LaunchIcon</string>
 	</dict>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
@@ -90,8 +106,5 @@
 	</array>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
-	<key>MinimumOSVersion</key>
-	<string>14.0</string>
-
 </dict>
 </plist>
