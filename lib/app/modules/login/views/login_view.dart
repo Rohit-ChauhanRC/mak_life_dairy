@@ -61,7 +61,7 @@ class LoginView extends GetView<LoginController> {
                         validator: (value) => value!.length < 10
                             ? "Please enter valid mobile no."
                             : null,
-                        keyboardType: TextInputType.text,
+                        keyboardType: TextInputType.phone,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
                         ],

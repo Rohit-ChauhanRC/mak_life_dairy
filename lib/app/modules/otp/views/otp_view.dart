@@ -95,7 +95,7 @@ class OtpView extends GetView<OtpController> {
                             value!.length < 4 || value!.length > 5
                                 ? "Please enter valid otp"
                                 : null,
-                        keyboardType: TextInputType.text,
+                        keyboardType: TextInputType.phone,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
                         ],

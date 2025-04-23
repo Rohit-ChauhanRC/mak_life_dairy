@@ -18,11 +18,17 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return UpgradeAlert(
+      barrierDismissible: false,
+      shouldPopScope: () => false,
       dialogStyle: UpgradeDialogStyle.cupertino,
       showIgnore: false,
       showLater: false,
       showReleaseNotes: true,
-      upgrader: Upgrader(),
+      upgrader: Upgrader(
+        minAppVersion: "20.0.0",
+        debugLogging: true,
+        durationUntilAlertAgain: const Duration(seconds: 1),
+      ),
       child: PopScope(
         canPop: false,
         onPopInvokedWithResult: (didPop, _) async {
@@ -39,11 +45,7 @@ class HomeView extends GetView<HomeController> {
               children: [
                 InAppWebView(
                   onCameraCaptureStateChanged:
-                      (controller, oldState, newState) async {
-                    print(oldState);
-                    print(newState);
-                    print(controller.getHtml());
-                  },
+                      (controller, oldState, newState) async {},
                   key: controller.webViewKey,
                   initialUrlRequest: URLRequest(
                       url: WebUri(
