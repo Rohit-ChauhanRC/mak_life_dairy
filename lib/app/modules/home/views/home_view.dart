@@ -25,7 +25,7 @@ class HomeView extends GetView<HomeController> {
       showLater: false,
       showReleaseNotes: true,
       upgrader: Upgrader(
-        minAppVersion: "20.0.0",
+        minAppVersion: Platform.isIOS ? "2.2" : "20.0.0",
         debugLogging: true,
         durationUntilAlertAgain: const Duration(seconds: 1),
       ),
@@ -53,6 +53,14 @@ class HomeView extends GetView<HomeController> {
                   initialSettings: controller.settings,
                   onWebViewCreated: (cx) {
                     controller.webViewController = cx;
+
+                    cx.addJavaScriptHandler(
+                      handlerName: "getVersion",
+                      callback: (args) async {
+                        debugPrint("getVersion");
+                        controller.getVersion();
+                      },
+                    );
                   },
                   onPermissionRequest: (controller, request) async {
                     return PermissionResponse(
@@ -185,7 +193,7 @@ class HomeView extends GetView<HomeController> {
           floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.purple[900],
             onPressed: null,
-            child: const Text(
+            child: Text(
               Constants.appVersion,
               style: TextStyle(color: Colors.white),
             ),

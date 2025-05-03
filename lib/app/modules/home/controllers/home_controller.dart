@@ -174,4 +174,6 @@ class HomeController extends GetxController {
       throw Exception(e);
     }
   }
+
+  String getVersion() => Constants.appVersion;
 }

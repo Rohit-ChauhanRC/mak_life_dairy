@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class Constants {
   const Constants._();
 
@@ -204,5 +206,5 @@ class Constants {
   static const String verifyOtp = "otp/OTPValidation";
   static const String cred = "mobile_no";
 
-  static const appVersion = "20.0.0";
+  static String appVersion = Platform.isIOS ? "2.2" : "20.0.0";
 }

@@ -95,12 +95,18 @@ class OtpController extends GetxController {
 
     debugPrint(sendOtpModel!.status.toString());
     if (sendOtpModel!.status == "200") {
+      print(sendOtpModel?.message.toString());
       circularProgress = true;
-      box.write(Constants.cred, mobileNumber);
-      Get.offAllNamed(
-        Routes.HOME,
-        arguments: mobileNumber,
-      );
+      if (sendOtpModel?.message == "Login success !") {
+        box.write(Constants.cred, mobileNumber);
+        Get.offAllNamed(
+          Routes.HOME,
+          arguments: mobileNumber,
+        );
+      } else {
+        Utils.showDialog(sendOtpModel!.message.toString(),
+            title: "Mak Life Dairy");
+      }
     } else {
       circularProgress = true;
       Utils.showDialog(Constants.error);
