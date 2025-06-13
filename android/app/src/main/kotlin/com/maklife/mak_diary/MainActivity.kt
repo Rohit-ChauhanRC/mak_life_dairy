@@ -32,7 +32,7 @@ class MainActivity: FlutterActivity() {
             if (call.method == "handleUPIUrl") {
                 val url = call.argument<String>("url")
                 if (url != null && url.startsWith("intent")) {
-                    handleUPIUrl(url)
+                    handleIntentUrl(url)
                     result.success(true)
                 } else {
                     result.error("INVALID_URL", "The URL is not valid", null)
@@ -68,6 +68,23 @@ class MainActivity: FlutterActivity() {
         intent.data = Uri.parse(url)
         startActivity(intent)
     }
+
+    private fun handleIntentUrl(url: String) {
+    try {
+        val intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME)
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        } else {
+            val fallbackUrl = intent.getStringExtra("browser_fallback_url")
+            if (fallbackUrl != null) {
+                val fallbackIntent = Intent(Intent.ACTION_VIEW, Uri.parse(fallbackUrl))
+                startActivity(fallbackIntent)
+            }
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
 }
 
 

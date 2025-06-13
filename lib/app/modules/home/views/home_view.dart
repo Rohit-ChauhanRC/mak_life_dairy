@@ -190,14 +190,14 @@ class HomeView extends GetView<HomeController> {
               ],
             ),
           ),
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.purple[900],
-            onPressed: null,
-            child: Text(
-              Constants.appVersion,
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
+          // floatingActionButton: FloatingActionButton(
+          //   backgroundColor: Colors.purple[900],
+          //   onPressed: null,
+          //   child: Text(
+          //     Constants.appVersion,
+          //     style: TextStyle(color: Colors.white),
+          //   ),
+          // ),
         ),
       ),
     );
