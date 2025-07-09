@@ -25,7 +25,7 @@ class HomeView extends GetView<HomeController> {
       showLater: false,
       showReleaseNotes: true,
       upgrader: Upgrader(
-        minAppVersion: Platform.isIOS ? "2.2" : "20.0.0",
+        minAppVersion: Platform.isIOS ? "2.2" : "20.0.2",
         debugLogging: true,
         durationUntilAlertAgain: const Duration(seconds: 1),
       ),

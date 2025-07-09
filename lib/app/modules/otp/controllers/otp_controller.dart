@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_mak_inapp/app/constants/constants.dart';
@@ -36,11 +38,16 @@ class OtpController extends GetxController {
   bool get resend => _resend.value;
   set resend(bool v) => _resend.value = v;
 
+  RxInt timerValue = 60.obs;
+  RxBool isResendEnabled = false.obs;
+  Timer? _timer;
+
   @override
   void onInit() {
     super.onInit();
     mobileNumber = Get.arguments.toString();
-    counter();
+    // counter();
+    startTimer();
   }
 
   @override
@@ -56,9 +63,31 @@ class OtpController extends GetxController {
     _otp.close();
   }
 
+  void startTimer() {
+    timerValue.value = 60;
+    isResendEnabled.value = false;
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (timerValue.value > 0) {
+        timerValue.value--;
+      } else {
+        timer.cancel();
+        isResendEnabled.value = true;
+        resendOtpB();
+      }
+    });
+  }
+
+  void resendOtpB() async {
+    if (isResendEnabled.value) {
+      // print("Resending OTP to $mobileNumber...");
+      startTimer();
+      await resendOtp();
+    }
+  }
+
   void counter() {
     for (var i = 1; i <= 80; i++) {
-      count += 1;
+      count += i;
     }
     if (count == 80) {
       resend = true;
