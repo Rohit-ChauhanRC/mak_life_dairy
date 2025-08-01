@@ -13,7 +13,7 @@ dependencies:
   permission_handler:
   dio: ^5.4.0
   get_storage: ^2.1.1
-  flutter_inappwebview: ^6.0.0
+  flutter_inappwebview: ^6.1.5
   url_launcher: ^6.2.2
   flutter_downloader: ^1.11.6
   path_provider: ^2.1.1
@@ -24,6 +24,7 @@ dependencies:
   upgrader: ^11.0.0
   syncfusion_flutter_pdfviewer: ^29.1.35
   share_plus: ^10.1.4
+  webview_flutter_wkwebview: ^3.22.1
   # path: ^1.8.3
 
 dev_dependencies:

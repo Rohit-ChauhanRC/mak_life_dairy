@@ -44,23 +44,48 @@ class HomeController extends GetxController {
 
   // https://play.google.com/store/apps/details?id=com.genmak.mak_life_dairy_fresh&hl=en_IN
 
+  // InAppWebViewSettings settings = InAppWebViewSettings(
+  //     useShouldOverrideUrlLoading: true,
+  //     clearCache: false,
+  //     isInspectable: kDebugMode,
+  //     mediaPlaybackRequiresUserGesture: true,
+  //     allowsInlineMediaPlayback: true,
+  //     iframeAllow:
+  //         "camera; microphone;storage;mediaLibrary;photosAddOnly;Photos",
+  //     iframeAllowFullscreen: true,
+  //     allowFileAccessFromFileURLs: true,
+  //     allowContentAccess: true,
+  //     allowFileAccess: true,
+  //     allowsBackForwardNavigationGestures: true,
+  //     useOnDownloadStart: true,
+  //     allowUniversalAccessFromFileURLs: true,
+  //     javaScriptEnabled: true,
+  //     useOnLoadResource: true);
+
   InAppWebViewSettings settings = InAppWebViewSettings(
-      useShouldOverrideUrlLoading: true,
-      clearCache: false,
-      isInspectable: kDebugMode,
-      mediaPlaybackRequiresUserGesture: true,
-      allowsInlineMediaPlayback: true,
-      iframeAllow:
-          "camera; microphone;storage;mediaLibrary;photosAddOnly;Photos",
-      iframeAllowFullscreen: true,
-      allowFileAccessFromFileURLs: true,
-      allowContentAccess: true,
-      allowFileAccess: true,
-      allowsBackForwardNavigationGestures: true,
-      useOnDownloadStart: true,
-      allowUniversalAccessFromFileURLs: true,
-      javaScriptEnabled: true,
-      useOnLoadResource: true);
+    isInspectable: kDebugMode,
+    mediaPlaybackRequiresUserGesture: false,
+    allowsInlineMediaPlayback: true,
+    iframeAllow: "camera; microphone;storage;mediaLibrary;photosAddOnly;Photos",
+    iframeAllowFullscreen: true,
+    allowFileAccessFromFileURLs: true,
+    allowContentAccess: true,
+    allowFileAccess: true,
+    allowsBackForwardNavigationGestures: true,
+    useOnDownloadStart: true,
+    allowUniversalAccessFromFileURLs: true,
+    javaScriptCanOpenWindowsAutomatically: true,
+    // allowingReadAccessTo: WebUri(source),
+    applePayAPIEnabled: true,
+    javaScriptEnabled: true,
+    useShouldOverrideUrlLoading: true,
+    domStorageEnabled: true,
+    loadWithOverviewMode: true,
+    verticalScrollBarEnabled: true,
+    geolocationEnabled: true,
+    limitsNavigationsToAppBoundDomains: true,
+    applicationNameForUserAgent: "Safari",
+  );
 
   PullToRefreshController? pullToRefreshController;
 

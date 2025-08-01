@@ -61,6 +61,10 @@ class HomeView extends GetView<HomeController> {
                         controller.getVersion();
                       },
                     );
+
+                    cx.evaluateJavascript(
+                        source:
+                            "sessionStorage.setItem('payuHandleIntent', true)");
                   },
                   onPermissionRequest: (controller, request) async {
                     return PermissionResponse(
@@ -69,7 +73,8 @@ class HomeView extends GetView<HomeController> {
                   },
                   onConsoleMessage: (cx, consoleMessage) {
                     if (kDebugMode) {
-                      print(consoleMessage);
+                      print(consoleMessage.messageLevel);
+                      print(consoleMessage.message);
                     }
                   },
                   shouldOverrideUrlLoading: (cx, navigationAction) async {
@@ -83,6 +88,10 @@ class HomeView extends GetView<HomeController> {
 
                     const platform2 =
                         MethodChannel("com.maklife.mak_diary/intent");
+
+                    // com.genmak.maklifedairy/upi
+                    const platform3 =
+                        MethodChannel("com.genmak.maklifedairy/upi");
                     final url = navigationAction.request.url;
 
                     if (url.toString().startsWith("http") ||
@@ -123,7 +132,15 @@ class HomeView extends GetView<HomeController> {
                       }
                     }
                     var url1 = navigationAction.request.url.toString();
-                    if (url1.startsWith("upi://pay")) {
+                    if (Platform.isIOS) {
+                      final bool handled = await platform3
+                          .invokeMethod("handleUPIUrl", {"url": url1});
+                      if (handled) {
+                        return NavigationActionPolicy.CANCEL;
+                      }
+                      return NavigationActionPolicy.CANCEL;
+                    }
+                    if (url1.startsWith("upi://")) {
                       try {
                         if (Platform.isAndroid) {
                           final bool handled = await platform1
@@ -132,12 +149,18 @@ class HomeView extends GetView<HomeController> {
                             return NavigationActionPolicy.CANCEL;
                           }
                         } else if (Platform.isIOS) {
-                          if (await canLaunchUrl(Uri.parse(url1.toString()))) {
-                            await launchUrl(Uri.parse(url1.toString()),
-                                mode: LaunchMode.externalApplication);
-                          } else {
-                            throw 'Could not launch ';
+                          // if (await canLaunchUrl(Uri.parse(url1.toString()))) {
+                          //   await launchUrl(Uri.parse(url1.toString()),
+                          //       mode: LaunchMode.externalApplication);
+                          // } else {
+                          //   throw 'Could not launch ';
+                          // }
+                          final bool handled = await platform1
+                              .invokeMethod("handleUPIUrl", {"url": url1});
+                          if (handled) {
+                            return NavigationActionPolicy.CANCEL;
                           }
+                          // return NavigationActionPolicy.CANCEL;
                         }
                       } on PlatformException catch (e) {
                         ScaffoldMessenger.of(context).showSnackBar(

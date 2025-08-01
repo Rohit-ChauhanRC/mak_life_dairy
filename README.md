@@ -1,16 +1,1 @@
-# webview_mak_inapp
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+gpay://upi/pay?pa=MAKLIFEDAIRYPRODUCERCO-8792286.payu@indus&pn=MAK%20LIFE%20DAIRY%20PRODUCER%20COMPANY%20LIMITED&tr=24506226648&tid=PPPL24506226648310725144417688b33e9&am=16200.00&cu=INR&tn=UPIIntent
