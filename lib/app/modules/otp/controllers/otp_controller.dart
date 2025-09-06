@@ -96,7 +96,7 @@ class OtpController extends GetxController {
 
   Future<dynamic> resendOtp() async {
     Utils.closeKeyboard();
-    if (!loginFormKey!.currentState!.validate()) {
+    if (!loginFormKey.currentState!.validate()) {
       return null;
     }
     SendOtpModel? sendOtpModel = SendOtpModel(status: "", message: "");

@@ -6,9 +6,12 @@
         <domain includeSubdomains="true">upi://pay?</domain>
 
 
-        <domain includeSubdomains="true">https://app.maklifedairy.in:5017</domain>
+        <domain includeSubdomains="true">http://lifeapp.maklife.in:8085</domain>
         <domain includeSubdomains="true">https://payu.maklifedairy.in</domain>
         <domain includeSubdomains="true">https://api.payu.in</domain>
+        <!-- https://easebuzz.maklife.in -->
+        <domain includeSubdomains="true">https://easebuzz.maklife.in</domain>
+
 
 
     </domain-config>

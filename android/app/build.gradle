@@ -14,16 +14,16 @@ if (localPropertiesFile.exists()) {
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
-    flutterVersionCode = '25'
+    flutterVersionCode = '5'
 }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
-    flutterVersionName = '20.0.3'
+    flutterVersionName = '5.0.0'
 }
 
 android {
-    namespace "com.maklife.mak_diary"
+    namespace "com.MAK_LIFE_APP"
     compileSdkVersion 36
 
     compileOptions {
@@ -41,7 +41,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.maklife.mak_diary"
+        applicationId "com.MAK_LIFE_APP"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion 23

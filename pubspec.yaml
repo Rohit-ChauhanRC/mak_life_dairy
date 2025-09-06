@@ -1,5 +1,5 @@
 name: webview_mak_inapp
-version: 20.0.3+25
+version: 5.0.0+5
 publish_to: none
 description: Mak Life Dairy.
 environment:
@@ -29,16 +29,16 @@ dependencies:
 
 dev_dependencies:
   flutter_lints: ^2.0.0
-  # flutter_native_splash: ^2.3.6
-  # flutter_launcher_icons: ^0.13.1
+  # flutter_native_splash: 
+  # flutter_launcher_icons: 
 
   flutter_test:
     sdk: flutter
 
 # flutter_native_splash:
 #   # color: "#5f6496"
-#   background_image: assets/images/background.jpeg
-#   image: assets/images/makdairy1.png
+#   background_image: assets/images/app_logo.png
+#   image: assets/images/app_logo.png
 #   # color_dark: "#1a1a1a"
 #   # image_darK: assets/icons/logo.png
 #   android: true
@@ -49,16 +49,16 @@ dev_dependencies:
 #   web_image_mode: center
 
 #   android_12:
-#     background_image: assets/images/background.jpeg
-#     image: assets/images/makdairy1.png
+#     background_image: assets/images/app_logo.png
+#     image: assets/images/app_logo.png
 
 # flutter_launcher_icons:
 #   android: "launcher_icon"
 #   ios: true
-#   image_path: "assets/images/logo.png"
+#   image_path: "assets/images/app_logo.png"
 #   min_sdk_android: 21 # android min sdk min:16, default 21
 #   # adaptive_icon_background: "#ffffff"
-#   adaptive_icon_foreground: "assets/images/logo.png"
+#   adaptive_icon_foreground: "assets/images/app_logo.png"
 
 flutter:
   uses-material-design: true

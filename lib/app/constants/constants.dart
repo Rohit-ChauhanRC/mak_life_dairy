@@ -14,8 +14,8 @@ class Constants {
   static const String error = "Something went wrong!";
   static const String success = "Success";
 
-  static const String appName = "Mak Life";
-  static const String appbarTitle = "Mak Life Dairy Producer Company Limited";
+  static const String appName = "Mak Life App";
+  static const String appbarTitle = "Mak Life Producer Company Limited";
   static const String companyInfo = "Company Info";
   static const String aboutUs = "About Us";
   static const String legal = "Legal";
