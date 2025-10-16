@@ -55,6 +55,14 @@ class LoginView extends GetView<LoginController> {
                   key: controller.loginFormKey,
                   child: Column(
                     children: [
+                      Text(
+                        Constants.login,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.purple[900],
+                        ),
+                      ),
                       Container(
                         margin: const EdgeInsets.only(
                           top: 30,
