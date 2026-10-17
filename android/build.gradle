@@ -1,12 +1,12 @@
 buildscript {
-    ext.kotlin_version = '1.8.22'
+    ext.kotlin_version = '2.2.20'
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.6.1'
+        classpath 'com.android.tools.build:gradle:8.13.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -24,6 +24,14 @@ subprojects {
 }
 subprojects {
     project.evaluationDependsOn(':app')
+    plugins.withId("com.android.library") {
+        android {
+            compileSdk = 37
+            defaultConfig {
+                targetSdk = 37
+            }
+        }
+    }
 }
 
 tasks.register("clean", Delete) {
